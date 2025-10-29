@@ -13,19 +13,18 @@
             changeOrigin: true,
             secure: false,
           }
-        },
-        // Disable file system caching to prevent stale module issues
-        fs: {
-          cachedChecks: false
         }
       },
       optimizeDeps: {
-        // CRITICAL FIX: Exclude only packages causing cache corruption
-        // Keep optimization enabled for CJS modules (like hoist-non-react-statics)
-        exclude: ['@mui/icons-material'],
-
-        // Force rebuild on every server start to prevent stale cache
-        force: true
+        include: [
+          '@mui/material',
+          '@mui/icons-material',
+          '@emotion/react',
+          '@emotion/styled'
+        ],
+        esbuildOptions: {
+          target: 'esnext'
+        }
       },
       build: {
         target: 'esnext'
