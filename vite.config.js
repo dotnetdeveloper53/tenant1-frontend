@@ -13,18 +13,16 @@
             changeOrigin: true,
             secure: false,
           }
+        },
+        // Disable file system caching to prevent stale module issues
+        fs: {
+          cachedChecks: false
         }
       },
       optimizeDeps: {
-        include: [
-          '@mui/material',
-          '@mui/icons-material',
-          '@emotion/react',
-          '@emotion/styled'
-        ],
-        esbuildOptions: {
-          target: 'esnext'
-        }
+        // CRITICAL FIX: Disable dependency optimization to prevent cache corruption
+        // This eliminates the .vite/deps cache that was causing intermittent errors
+        disabled: true
       },
       build: {
         target: 'esnext'
