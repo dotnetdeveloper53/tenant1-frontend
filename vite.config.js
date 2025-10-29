@@ -20,9 +20,12 @@
         }
       },
       optimizeDeps: {
-        // CRITICAL FIX: Disable dependency optimization to prevent cache corruption
-        // This eliminates the .vite/deps cache that was causing intermittent errors
-        disabled: true
+        // CRITICAL FIX: Exclude only packages causing cache corruption
+        // Keep optimization enabled for CJS modules (like hoist-non-react-statics)
+        exclude: ['@mui/icons-material'],
+
+        // Force rebuild on every server start to prevent stale cache
+        force: true
       },
       build: {
         target: 'esnext'
